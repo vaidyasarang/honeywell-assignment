@@ -1,0 +1,78 @@
+ <div style="background-color: cadetblue;
+    margin-top: 9px;
+    margin-bottom: 9px;
+    height: 26px;">
+  <button class="button" (click)="openCart(true)">
+  Cart
+  </button><button  class="button" (click)="openHome()">
+  Home
+  </button>
+  <button  class="button" (click)="addCategory(false)">
+  Add category
+  </button></div>
+
+<div *ngIf="category">
+  <input type="text" [(ngModel)]="cat"> 
+  <button  class="button" (click)="addCategory1(cat)">Add Category</button>
+</div>
+
+  <div *ngIf="cart">
+
+    <table class="table table-hover"   id="custom-table">
+    <thead>
+        <tr>
+            <td>Sr. No.</td>
+            <td>Product</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let category of cartValue; let i = index">
+            <td>{{i+1}}</td>
+            <td>{{category}}</td>
+        </tr>
+    </tbody>
+</table> 
+
+
+  </div>
+<div *ngIf="home">
+<table class="table table-hover"  id="custom-table">
+    <thead>
+        <tr>
+            <td>Category</td>
+            <td>Title</td>
+            <td>Product Name</td>
+            <td>Action</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let category of categories; let i = index">
+            <td>{{category.name}}</td>
+            <td><button  class="button" (click)="onSelect(category.name)">Products</button></td>
+             <td><input type="text" [(ngModel)]="category.newProduct" id="{{i+1}}"></td>
+            <td><button  class="button" (click)="addProduct(category)">Add Product</button></td>
+
+        </tr>
+    </tbody>
+</table> 
+
+<ng-container *ngIf="display">
+  <div><h1>Products</h1></div>
+  <div>
+<table class="table table-hover"  id="custom-table">
+    <thead>
+        <tr>
+            <td>Product</td>
+            <td>Title</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let category of productDisplay[0].products">
+            <td>{{category}}</td>
+            <td><button  class="button" (click)="addToCart(category)">Add To Cart</button></td>
+        </tr>
+    </tbody>
+</table>
+</div>
+</ng-container>
+</div>
